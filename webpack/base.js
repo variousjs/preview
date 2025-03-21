@@ -11,7 +11,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.html'),
-      filename: path.resolve(__dirname, '../public/index.html'),
+      filename: path.resolve(__dirname, '../docs/index.html'),
       config: JSON.stringify(variousConfig.config, null, 2),
       inject: false,
     }),
@@ -19,7 +19,7 @@ const config = {
   stats: 'minimal',
   entry: variousConfig.components,
   output: {
-    path: path.resolve(__dirname, '../public/dist'),
+    path: path.resolve(__dirname, '../docs/dist'),
     publicPath: '/dist/',
     filename: '[name].js',
     libraryTarget: 'amd',
@@ -47,10 +47,10 @@ const config = {
     port: 2333,
     host: '0.0.0.0',
     static: {
-      directory: path.join(__dirname, '../public'),
+      directory: path.join(__dirname, '../docs'),
     },
     // 监听文件构建后重新刷新页面，包括 html 文件
-    watchFiles: ['public'],
+    watchFiles: ['docs'],
   },
   module: {
     rules: [
