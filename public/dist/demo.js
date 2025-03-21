@@ -27210,6 +27210,17 @@ function form(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_arco_design_web_react_es_Input__WEBPACK_IMPORTED_MODULE_5__["default"], {
     placeholder: "pass in attributes, JSON structure"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(FormItem, {
+    label: "Dependencies",
+    field: "dependencies"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_arco_design_web_react_es_Input__WEBPACK_IMPORTED_MODULE_5__["default"].TextArea, {
+    rows: 5,
+    placeholder: `component dependencies, JSON structure. Default react/react-dom/react-router-dom
+{
+  "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
+  "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
+  "react-router-dom": "https://cdn.jsdelivr.net/npm/@variousjs/registry@0.1.5/dist/react-router-dom/6.22.1/index.js"
+}`
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(FormItem, {
     wrapperCol: {
       offset: 5
     }
@@ -27454,10 +27465,16 @@ const S = () => {
 
   const render = v => {
     let props = {};
+    let depes;
 
     try {
       props = JSON.parse(v.props);
+      depes = JSON.parse(v.dependencies);
     } catch (e) {// ignore
+    }
+
+    if (depes) {
+      (0,_variousjs_various__WEBPACK_IMPORTED_MODULE_3__.defineDependencies)(depes);
     }
 
     (0,_variousjs_various__WEBPACK_IMPORTED_MODULE_3__.renderComponent)({

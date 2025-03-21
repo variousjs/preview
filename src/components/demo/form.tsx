@@ -30,6 +30,17 @@ export default function form(props: Props) {
       <FormItem label="Props" field='props'>
         <Input placeholder='pass in attributes, JSON structure' />
       </FormItem>
+      <FormItem label="Dependencies" field='dependencies'>
+        <Input.TextArea
+          rows={5}
+          placeholder={`component dependencies, JSON structure. Default react/react-dom/react-router-dom
+{
+  "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
+  "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
+  "react-router-dom": "https://cdn.jsdelivr.net/npm/@variousjs/registry@0.1.5/dist/react-router-dom/6.22.1/index.js"
+}`}
+        />
+      </FormItem>
       <FormItem wrapperCol={{ offset: 5 }}>
         <Button type='primary' htmlType='submit' style={{ marginRight: 24 }}>
           Confirm

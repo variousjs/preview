@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { renderComponent } from '@variousjs/various'
+import { renderComponent, defineDependencies } from '@variousjs/various'
 import { HashRouter } from 'react-router-dom'
 import { Button, Modal } from '@arco-design/web-react'
 import { IconSettings } from '@arco-design/web-react/icon'
@@ -11,10 +11,17 @@ const S = () => {
 
   const render = (v: Record<string, string>) => {
     let props: any = {}
+    let depes: any
+
     try {
       props = JSON.parse(v.props)
+      depes = JSON.parse(v.dependencies)
     } catch (e) {
       // ignore
+    }
+
+    if (depes) {
+      defineDependencies(depes)
     }
 
     renderComponent({
