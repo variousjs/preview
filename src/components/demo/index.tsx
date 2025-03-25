@@ -25,7 +25,7 @@ const S = () => {
     }
 
     renderComponent({
-      name: 'Demo',
+      name: v.name || 'Demo',
       module: v.subModule,
       props,
       target: document.querySelector('#demo'),

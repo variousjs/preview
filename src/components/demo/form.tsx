@@ -21,6 +21,9 @@ export default function form(props: Props) {
       autoComplete='off'
       onSubmit={props.onSubmit}
     >
+      <FormItem label="Name" field='name'>
+        <Input placeholder='component name, amd export name, default `Demo`' />
+      </FormItem>
       <FormItem label="URL" field='url' rules={[{ required: true, message: ' ', match: /^https?:\/\/[^\s/?#]+[^\s]*$/i }]}>
         <Input placeholder='preview component url, suffix *.js' />
       </FormItem>
