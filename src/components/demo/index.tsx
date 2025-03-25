@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { renderComponent, defineDependencies } from '@variousjs/various'
 import { HashRouter } from 'react-router-dom'
 import { Button, Modal } from '@arco-design/web-react'
@@ -8,6 +8,7 @@ import csses from './index.less'
 
 const S = () => {
   const [visible, setVisible] = useState(false)
+  const remove = useRef<() => void>()
 
   const render = (v: Record<string, string>) => {
     let props: any = {}
@@ -24,7 +25,7 @@ const S = () => {
       defineDependencies(depes)
     }
 
-    renderComponent({
+    remove.current = renderComponent({
       name: v.name || 'Demo',
       module: v.subModule,
       props,
@@ -58,7 +59,10 @@ const S = () => {
       >
         <Form onSubmit={(v) => {
           setVisible(false)
-          render(v)
+          remove.current?.()
+          setTimeout(() => {
+            render(v)
+          })
         }} />
       </Modal>
     </>
