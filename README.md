@@ -1,14 +1,3 @@
-# VariousJS
+# VariousJS Preview
 
-VariousJS boilerplate
-
-```bash
-$ npm init @variousjs
-$ npm i
-
-# dev
-$ npm start
-
-# build
-$ npm run build
-```
+https://variousjs.github.io/preview/
