@@ -9,6 +9,7 @@ import csses from './index.less'
 const S = () => {
   const [visible, setVisible] = useState(false)
   const remove = useRef<() => void>()
+  const [bg, setBg] = useState('px')
 
   const render = (v: Record<string, string>) => {
     let props: any = {}
@@ -26,7 +27,7 @@ const S = () => {
     }
 
     remove.current = renderComponent({
-      name: v.name || 'Demo',
+      name: v.name || 'Preview Component',
       module: v.subModule,
       props,
       target: document.querySelector('#demo'),
@@ -47,7 +48,7 @@ const S = () => {
         icon={<IconSettings />}
         onClick={() => setVisible(true)}
       />
-      <div className={csses.demo}>
+      <div className={`${csses.demo} ${csses[bg]}`}>
         <div id="demo" />
       </div>
       <Modal
@@ -57,13 +58,18 @@ const S = () => {
         onCancel={() => setVisible(false)}
         footer={null}
       >
-        <Form onSubmit={(v) => {
-          setVisible(false)
-          remove.current?.()
-          setTimeout(() => {
-            render(v)
-          })
-        }} />
+        <Form
+          onSubmit={(v) => {
+            setVisible(false)
+            remove.current?.()
+            setTimeout(() => {
+              render(v)
+            })
+          }}
+          onBgChange={(v) => {
+            setBg(v)
+          }}
+        />
       </Modal>
     </>
   )

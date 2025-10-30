@@ -1,11 +1,11 @@
 import React from 'react'
-import { Form, Input, Button } from '@arco-design/web-react'
+import { Form, Input, Button, Radio } from '@arco-design/web-react'
+import csses from './index.less'
 
 interface Props {
   onSubmit: (v: Record<string, string>) => void;
+  onBgChange: (v: string) => void;
 }
-
-const FormItem = Form.Item
 
 export default function form(props: Props) {
   const [form] = Form.useForm()
@@ -20,20 +20,41 @@ export default function form(props: Props) {
       style={{ maxWidth: 600 }}
       autoComplete='off'
       onSubmit={props.onSubmit}
+      onChange={(v) => {
+        if (v.background) {
+          props.onBgChange(v.background)
+        }
+      }}
     >
-      <FormItem label="Name" field='name'>
-        <Input placeholder='component name, amd export name, default `Demo`' />
-      </FormItem>
-      <FormItem label="URL" field='url' rules={[{ required: true, message: ' ', match: /^https?:\/\/[^\s/?#]+[^\s]*$/i }]}>
+      <Form.Item label="Background" field='background'>
+        <Radio.Group>
+          <Radio value='px'>
+            <div className={`${csses.px} ${csses.bg}`} />
+          </Radio>
+          <Radio value='white'>
+            <div className={csses.bg} />
+          </Radio>
+          <Radio value='black'>
+            <div className={`${csses.black} ${csses.bg}`} />
+          </Radio>
+          <Radio value='grey'>
+            <div className={`${csses.grey} ${csses.bg}`} />
+          </Radio>
+        </Radio.Group>
+      </Form.Item>
+      <Form.Item label="Name" field='name'>
+        <Input placeholder='component name, amd export name' />
+      </Form.Item>
+      <Form.Item label="URL" field='url' rules={[{ required: true, message: ' ', match: /^https?:\/\/[^\s/?#]+[^\s]*$/i }]}>
         <Input placeholder='preview component url, suffix *.js' />
-      </FormItem>
-      <FormItem label="SubModule" field='subModule'>
+      </Form.Item>
+      <Form.Item label="SubModule" field='subModule'>
         <Input placeholder='if module exports multiple entry, can specify the preview entry' />
-      </FormItem>
-      <FormItem label="Props" field='props'>
+      </Form.Item>
+      <Form.Item label="Props" field='props'>
         <Input placeholder='pass in attributes, JSON structure' />
-      </FormItem>
-      <FormItem label="Dependencies" field='dependencies'>
+      </Form.Item>
+      <Form.Item label="Dependencies" field='dependencies'>
         <Input.TextArea
           rows={5}
           placeholder={`component dependencies, JSON structure. Default react/react-dom/react-router-dom
@@ -43,12 +64,12 @@ export default function form(props: Props) {
   "react-router-dom": "https://cdn.jsdelivr.net/npm/@variousjs/registry@0.1.5/dist/react-router-dom/6.22.1/index.js"
 }`}
         />
-      </FormItem>
-      <FormItem wrapperCol={{ offset: 5 }}>
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 5 }}>
         <Button type='primary' htmlType='submit' style={{ marginRight: 24 }}>
           Confirm
         </Button>
-      </FormItem>
+      </Form.Item>
     </Form>
   );
 }

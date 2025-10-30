@@ -1,6 +1,5 @@
-import { Dispatch } from '@variousjs/various'
+import { App } from '@variousjs/various'
 
-const actions: Record<string, Dispatch<any>> = {
-}
+const actions = {} as App['actions']
 
 export default actions

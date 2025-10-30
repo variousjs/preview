@@ -8,7 +8,7 @@ const errorComponent: ErrorNode = ({ $reload, $error }) => (
     type='error'
     title={$error.type}
     content={$error.message || 'unknow error'}
-    action={$reload ? <Button size="small" type="outline" onClick={$reload}>Reload</Button> : undefined}
+    action={<Button size="small" type="outline" onClick={$reload}>Reload</Button>}
   />
 )
 
