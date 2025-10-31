@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "tsc --skipLibCheck --noemit && eslint . --ext .ts,.tsx,.js",
-    "start": "NODE_ENV=development webpack --progress --config ./webpack/component.js & webpack serve --config ./webpack/app.js --progress",
+    "start": "NODE_ENV=development webpack --progress --config ./webpack/component.js & webpack serve --config ./webpack/app.js --progress --no-client-overlay",
     "build": "webpack --progress --config ./webpack/base.js"
   },
   "author": "LoeiFy <LoeiFy@gmail.com>",
@@ -41,6 +41,7 @@
     "html-webpack-plugin": "^5.6.0",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
+    "react-chrome-dino-ts": "^0.1.2",
     "style-loader": "^3.3.0",
     "typescript": "^5.4.2",
     "webpack": "^5.78.0",

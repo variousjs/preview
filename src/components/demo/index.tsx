@@ -7,6 +7,7 @@ import Form from './form'
 import csses from './index.less'
 
 const S = () => {
+  const version = useRef(0)
   const [visible, setVisible] = useState(false)
   const remove = useRef<() => void>()
   const [bg, setBg] = useState('px')
@@ -23,11 +24,16 @@ const S = () => {
     }
 
     if (depes) {
+      delete depes.react
+      delete depes['react-dom']
+      delete depes['@variousjs/various']
+      delete depes['react-router-dom']
+      delete depes.vue
       defineDependencies(depes)
     }
 
     remove.current = renderComponent({
-      name: v.name || 'Preview Component',
+      name: 'Component-' + version.current,
       module: v.subModule,
       props,
       target: document.querySelector('#demo'),
@@ -53,6 +59,7 @@ const S = () => {
         <div id="demo" />
       </div>
       <Modal
+        keepDOM
         style={{ width: 680 }}
         title='Preview Config'
         visible={visible}
@@ -63,9 +70,13 @@ const S = () => {
           onSubmit={(v) => {
             setVisible(false)
             remove.current?.()
+            // @ts-ignore
+            window.requirejs.undef('Component-' + version.current)
+            version.current += 1
             setTimeout(() => {
               render(v)
-            })
+            }, 100)
+            setBg(v.background)
           }}
           onBgChange={(v) => {
             setBg(v)

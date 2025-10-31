@@ -13,18 +13,14 @@ interface Props {
 const JsonEditor = createComponent<JsonEditorProps>({ name: 'json' })
 
 export default function form(props: Props) {
-  const config = (window as any).VARIOUS_CONFIG
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { app, demo, json, ...rest } = config.dependencies
-
   const JsonEditorField = useMemo(() => withField(JsonEditor), [])
 
   return (
     <Form
       initValues={{
-        url: 'https://unpkg.com/react-ios-switch@0.1.19/build/bundle.js',
+        url: './dino/index.js',
         props: '{"checked":true}',
-        dependencies: JSON.stringify(rest, null, 2),
+        dependencies: '{}',
         background: 'px',
       }}
       style={{ maxWidth: 600 }}
@@ -53,7 +49,6 @@ export default function form(props: Props) {
           <div className={`${csses.grey} ${csses.bg}`} />
         </Form.Radio>
       </Form.RadioGroup>
-      <Form.Input field="name" label="Name" placeholder='component name, amd export name' />
       <Form.Input rules={[{ required: true, message: 'url error', type: 'url' }]} field="url" label="URL" placeholder='preview component url, suffix *.js' />
       <Form.Input field="subModule" label="SubModule" placeholder='if module exports multiple entry, can specify the preview entry' />
       <JsonEditorField
@@ -76,7 +71,10 @@ export default function form(props: Props) {
         field="dependencies"
         title="Edit Dependencies"
       />
-      <div style={{ padding: '20px 0 30px', marginLeft: 150 }}>
+      <div style={{ padding: '20px 0 30px', marginLeft: 150, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Button size="large" type="warning" theme="solid" htmlType="reset">
+          Reset
+        </Button>
         <Button size="large" type="primary" theme="solid" htmlType="submit">
           Confirm
         </Button>
