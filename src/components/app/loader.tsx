@@ -1,8 +1,10 @@
 import React from 'react'
-import { Spin } from '@arco-design/web-react'
+import { Spin } from '@douyinfe/semi-ui'
 
 export default function Loader() {
   return (
-    <Spin dot size={10} />
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <Spin />
+    </div>
   )
 }

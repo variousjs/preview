@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const variousConfig = require('../various.config')
 
 const { NODE_ENV } = process.env
@@ -15,6 +16,7 @@ const config = {
       config: JSON.stringify(variousConfig.config, null, 2),
       inject: false,
     }),
+    // new BundleAnalyzerPlugin(),
   ],
   stats: 'minimal',
   entry: variousConfig.components,

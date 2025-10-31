@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { renderComponent, defineDependencies } from '@variousjs/various'
 import { HashRouter } from 'react-router-dom'
-import { Button, Modal } from '@arco-design/web-react'
-import { IconSettings } from '@arco-design/web-react/icon'
+import { Button, Modal } from '@douyinfe/semi-ui'
+import { IconSettingStroked } from '@douyinfe/semi-icons'
 import Form from './form'
 import csses from './index.less'
 
@@ -44,8 +44,9 @@ const S = () => {
         size="large"
         type="primary"
         shape="round"
+        theme="solid"
         className={csses.icon}
-        icon={<IconSettings />}
+        icon={<IconSettingStroked />}
         onClick={() => setVisible(true)}
       />
       <div className={`${csses.demo} ${csses[bg]}`}>

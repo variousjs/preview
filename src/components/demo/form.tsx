@@ -1,5 +1,8 @@
-import React from 'react'
-import { Form, Input, Button, Radio } from '@arco-design/web-react'
+import React, { useMemo } from 'react'
+import { createComponent } from '@variousjs/various'
+import { IconHelpCircle } from '@douyinfe/semi-icons';
+import { Button, Form, Tooltip, withField } from '@douyinfe/semi-ui'
+import { Props as JsonEditorProps } from '../json'
 import csses from './index.less'
 
 interface Props {
@@ -7,69 +10,77 @@ interface Props {
   onBgChange: (v: string) => void;
 }
 
+const JsonEditor = createComponent<JsonEditorProps>({ name: 'json' })
+
 export default function form(props: Props) {
-  const [form] = Form.useForm()
+  const config = (window as any).VARIOUS_CONFIG
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { app, demo, json, ...rest } = config.dependencies
+
+  const JsonEditorField = useMemo(() => withField(JsonEditor), [])
 
   return (
     <Form
-      form={form}
-      initialValues={{
+      initValues={{
         url: 'https://unpkg.com/react-ios-switch@0.1.19/build/bundle.js',
         props: '{"checked":true}',
+        dependencies: JSON.stringify(rest, null, 2),
+        background: 'px',
       }}
       style={{ maxWidth: 600 }}
+      labelPosition="left"
+      labelAlign="right"
       autoComplete='off'
+      labelWidth={150}
       onSubmit={props.onSubmit}
-      onChange={(v) => {
+      onValueChange={(_, v) => {
         if (v.background) {
           props.onBgChange(v.background)
         }
       }}
     >
-      <Form.Item label="Background" field='background'>
-        <Radio.Group>
-          <Radio value='px'>
-            <div className={`${csses.px} ${csses.bg}`} />
-          </Radio>
-          <Radio value='white'>
-            <div className={csses.bg} />
-          </Radio>
-          <Radio value='black'>
-            <div className={`${csses.black} ${csses.bg}`} />
-          </Radio>
-          <Radio value='grey'>
-            <div className={`${csses.grey} ${csses.bg}`} />
-          </Radio>
-        </Radio.Group>
-      </Form.Item>
-      <Form.Item label="Name" field='name'>
-        <Input placeholder='component name, amd export name' />
-      </Form.Item>
-      <Form.Item label="URL" field='url' rules={[{ required: true, message: ' ', match: /^https?:\/\/[^\s/?#]+[^\s]*$/i }]}>
-        <Input placeholder='preview component url, suffix *.js' />
-      </Form.Item>
-      <Form.Item label="SubModule" field='subModule'>
-        <Input placeholder='if module exports multiple entry, can specify the preview entry' />
-      </Form.Item>
-      <Form.Item label="Props" field='props'>
-        <Input placeholder='pass in attributes, JSON structure' />
-      </Form.Item>
-      <Form.Item label="Dependencies" field='dependencies'>
-        <Input.TextArea
-          rows={5}
-          placeholder={`component dependencies, JSON structure. Default react/react-dom/react-router-dom
-{
-  "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
-  "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
-  "react-router-dom": "https://cdn.jsdelivr.net/npm/@variousjs/registry@0.1.5/dist/react-router-dom/6.22.1/index.js"
-}`}
-        />
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 5 }}>
-        <Button type='primary' htmlType='submit' style={{ marginRight: 24 }}>
+      <Form.RadioGroup field='background' label='Background'>
+        <Form.Radio value='px'>
+          <div className={`${csses.px} ${csses.bg}`} />
+        </Form.Radio>
+        <Form.Radio value='white'>
+          <div className={csses.bg} />
+        </Form.Radio>
+        <Form.Radio value='black'>
+          <div className={`${csses.black} ${csses.bg}`} />
+        </Form.Radio>
+        <Form.Radio value='grey'>
+          <div className={`${csses.grey} ${csses.bg}`} />
+        </Form.Radio>
+      </Form.RadioGroup>
+      <Form.Input field="name" label="Name" placeholder='component name, amd export name' />
+      <Form.Input rules={[{ required: true, message: 'url error', type: 'url' }]} field="url" label="URL" placeholder='preview component url, suffix *.js' />
+      <Form.Input field="subModule" label="SubModule" placeholder='if module exports multiple entry, can specify the preview entry' />
+      <JsonEditorField
+        label={{
+        text: 'Props',
+        extra: <Tooltip content='component props, JSON structure'>
+          <IconHelpCircle style={{ color: 'var(--semi-color-text-2)' }}/>
+          </Tooltip>
+        }}
+        field="props"
+        title="Edit Props"
+      />
+      <JsonEditorField
+        label={{
+        text: 'Dependencies',
+        extra: <Tooltip content='component dependencies, JSON structure'>
+          <IconHelpCircle style={{ color: 'var(--semi-color-text-2)' }}/>
+          </Tooltip>
+        }}
+        field="dependencies"
+        title="Edit Dependencies"
+      />
+      <div style={{ padding: '20px 0 30px', marginLeft: 150 }}>
+        <Button size="large" type="primary" theme="solid" htmlType="submit">
           Confirm
         </Button>
-      </Form.Item>
+      </div>
     </Form>
   );
 }

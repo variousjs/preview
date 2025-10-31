@@ -1,15 +1,17 @@
 import React from 'react'
 import { ErrorNode } from '@variousjs/various'
-import { Alert, Button } from '@arco-design/web-react'
+import { Banner, Button } from '@douyinfe/semi-ui'
 
 const errorComponent: ErrorNode = ({ $reload, $error }) => (
-  <Alert
-    style={{ minWidth: 500 }}
-    type='error'
+  <Banner
+    fullMode={false}
     title={$error.type}
-    content={$error.message || 'unknow error'}
-    action={<Button size="small" type="outline" onClick={$reload}>Reload</Button>}
-  />
+    description={$error.message || 'unknow error'}
+    bordered
+    type="warning"
+  >
+    <Button type="warning" onClick={$reload}>Reload</Button>
+  </Banner>
 )
 
 export default errorComponent
