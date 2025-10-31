@@ -33,6 +33,7 @@ const S = () => {
     }
 
     remove.current = renderComponent({
+      type: v.type as 'react',
       name: 'Component-' + version.current,
       module: v.subModule,
       props,

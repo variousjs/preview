@@ -18,10 +18,11 @@ export default function form(props: Props) {
   return (
     <Form
       initValues={{
-        url: 'https://cdn.jsdelivr.net/gh/variousjs/preview@master/docs/dist/dino.js',
-        props: '{}',
+        url: location.origin + location.pathname + 'dist/dino.js',
+        props: '{ "instructions": "Press space to jump" }',
         dependencies: '{}',
         background: 'px',
+        type: 'react',
       }}
       style={{ maxWidth: 600 }}
       labelPosition="left"
@@ -47,6 +48,14 @@ export default function form(props: Props) {
         </Form.Radio>
         <Form.Radio value='grey'>
           <div className={`${csses.grey} ${csses.bg}`} />
+        </Form.Radio>
+      </Form.RadioGroup>
+      <Form.RadioGroup type="button" field='type' label='Type'>
+        <Form.Radio value='react'>
+          React
+        </Form.Radio>
+        <Form.Radio value='vue3'>
+          Vue3
         </Form.Radio>
       </Form.RadioGroup>
       <Form.Input rules={[{ required: true, message: 'url error', type: 'url' }]} field="url" label="URL" placeholder='preview component url, suffix *.js' />

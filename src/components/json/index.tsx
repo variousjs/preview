@@ -43,6 +43,9 @@ function JsonEditor(props: Props) {
           showSearch={false}
           options={{
             autoWrap: false,
+            formatOptions: {
+              tabSize: 2,
+            },
           }}
         />
       </Modal>
