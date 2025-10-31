@@ -18,8 +18,8 @@ export default function form(props: Props) {
   return (
     <Form
       initValues={{
-        url: './dino/index.js',
-        props: '{"checked":true}',
+        url: 'https://cdn.jsdelivr.net/gh/variousjs/preview@master/docs/dist/dino.js',
+        props: '{}',
         dependencies: '{}',
         background: 'px',
       }}
