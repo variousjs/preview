@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { renderComponent, defineDependencies } from '@variousjs/various'
+import { renderComponent, defineDependencies, removeLoadedModules } from '@variousjs/various'
 import { HashRouter } from 'react-router-dom'
 import { Button, Modal } from '@douyinfe/semi-ui'
 import { IconSettingStroked } from '@douyinfe/semi-icons'
@@ -24,11 +24,6 @@ const S = () => {
     }
 
     if (depes) {
-      delete depes.react
-      delete depes['react-dom']
-      delete depes['@variousjs/various']
-      delete depes['react-router-dom']
-      delete depes.vue
       defineDependencies(depes)
     }
 
@@ -71,8 +66,7 @@ const S = () => {
           onSubmit={(v) => {
             setVisible(false)
             remove.current?.()
-            // @ts-ignore
-            window.requirejs.undef('Component-' + version.current)
+            removeLoadedModules(['Component-' + version.current])
             version.current += 1
             setTimeout(() => {
               render(v)
