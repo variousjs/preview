@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { createComponent } from '@variousjs/various'
 import { IconHelpCircle } from '@douyinfe/semi-icons';
 import { Button, Form, Tooltip, withField } from '@douyinfe/semi-ui'
+import { BaseFormApi } from '@douyinfe/semi-foundation/lib/es/form/interface'
 import { Props as JsonEditorProps } from '../json'
 import csses from './index.less'
 
@@ -14,9 +15,11 @@ const JsonEditor = createComponent<JsonEditorProps>({ name: 'json' })
 
 export default function form(props: Props) {
   const JsonEditorField = useMemo(() => withField(JsonEditor), [])
+  const formCtx = useRef<BaseFormApi>()
 
   return (
     <Form
+      getFormApi={(api) => formCtx.current = api}
       initValues={{
         url: location.origin + location.pathname + 'dist/dino.js',
         props: '{ "instructions": "Press space to jump" }',
@@ -33,6 +36,12 @@ export default function form(props: Props) {
       onValueChange={(_, v) => {
         if (v.background) {
           props.onBgChange(v.background)
+        }
+        if (v.type) {
+          const isUrlTouched = formCtx.current?.getTouched('url')
+          if (!isUrlTouched) {
+            formCtx.current?.setValue('url', 'https://unpkg.com/vue-toggles@2.2.1/dist/vue-toggles.umd.cjs')
+          }
         }
       }}
     >

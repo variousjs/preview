@@ -9,10 +9,10 @@ import csses from './index.less'
 const S = () => {
   const version = useRef(0)
   const [visible, setVisible] = useState(false)
-  const remove = useRef<() => void>()
+  const remove = useRef<() => Promise<void>>()
   const [bg, setBg] = useState('px')
 
-  const render = (v: Record<string, string>) => {
+  const render = async (v: Record<string, string>) => {
     let props: any = {}
     let depes: any
 
@@ -27,7 +27,7 @@ const S = () => {
       defineDependencies(depes)
     }
 
-    remove.current = renderComponent({
+    remove.current = await renderComponent({
       type: v.type as 'react',
       name: 'Component-' + version.current,
       module: v.subModule,
@@ -63,9 +63,9 @@ const S = () => {
         footer={null}
       >
         <Form
-          onSubmit={(v) => {
+          onSubmit={async (v) => {
             setVisible(false)
-            remove.current?.()
+            await remove.current?.()
             removeLoadedModules(['Component-' + version.current])
             version.current += 1
             setTimeout(() => {

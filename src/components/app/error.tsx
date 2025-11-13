@@ -1,8 +1,8 @@
 import React from 'react'
-import { ErrorNode } from '@variousjs/various'
+import { ErrorFallbackNode } from '@variousjs/various'
 import { Banner, Button } from '@douyinfe/semi-ui'
 
-const errorComponent: ErrorNode = ({ $reload, $error }) => (
+const errorComponent: ErrorFallbackNode = ({ $reload, $error }) => (
   <Banner
     fullMode={false}
     title={$error.type}
