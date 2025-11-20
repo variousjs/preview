@@ -16,23 +16,5 @@ module.exports = {
   ],
   plugins: [
     '@babel/plugin-transform-runtime',
-    [
-      'babel-plugin-import',
-      {
-        libraryName: '@arco-design/web-react',
-        libraryDirectory: 'es',
-        camel2DashComponentName: false,
-        style: 'css',
-      },
-    ],
-    [
-      'babel-plugin-import',
-      {
-        libraryName: '@arco-design/web-react/icon',
-        libraryDirectory: 'react-icon',
-        camel2DashComponentName: false,
-      },
-      'icon',
-    ],
   ],
 }
