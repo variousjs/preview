@@ -11,7 +11,7 @@ interface Props {
   onBgChange: (v: string) => void;
 }
 
-const JsonEditor = createComponent<JsonEditorProps>({ name: 'json' })
+const JsonEditor = createComponent<JsonEditorProps>({ module: 'json' })
 
 export default function form(props: Props) {
   const JsonEditorField = useMemo(() => withField(JsonEditor), [])
@@ -68,11 +68,11 @@ export default function form(props: Props) {
         </Form.Radio>
       </Form.RadioGroup>
       <Form.Input rules={[{ required: true, message: 'url error', type: 'url' }]} field="url" label="URL" placeholder='preview component url, suffix *.js' />
-      <Form.Input field="subModule" label="SubModule" placeholder='if module exports multiple entry, can specify the preview entry' />
+      <Form.Input field="subModule" label="Module Entry" placeholder='specify the module entry' />
       <JsonEditorField
         label={{
         text: 'Props',
-        extra: <Tooltip content='component props, JSON structure'>
+        extra: <Tooltip content='custom component props'>
           <IconHelpCircle style={{ color: 'var(--semi-color-text-2)' }}/>
           </Tooltip>
         }}
@@ -82,7 +82,7 @@ export default function form(props: Props) {
       <JsonEditorField
         label={{
         text: 'Dependencies',
-        extra: <Tooltip content='component dependencies, JSON structure'>
+        extra: <Tooltip content='component dependencies'>
           <IconHelpCircle style={{ color: 'var(--semi-color-text-2)' }}/>
           </Tooltip>
         }}

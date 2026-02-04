@@ -29,8 +29,7 @@ const S = () => {
 
     remove.current = await renderComponent({
       type: v.type as 'react',
-      name: 'Component-' + version.current,
-      module: v.subModule,
+      module: `Component-${version.current}${v.subModule ? `.${v.subModule}` : ''}`,
       props,
       target: document.querySelector('#demo'),
       renderNode(children) {

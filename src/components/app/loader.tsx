@@ -8,7 +8,7 @@ export default function Loader(props: FallbackProps) {
     <div
       style={{
         display: 'flex',
-        justifyContent: $self.name === 'json' ? 'flex-start' : 'center',
+        justifyContent: $self.module === 'json' ? 'flex-start' : 'center',
         alignItems: 'center',
         height: '100%',
       }}
