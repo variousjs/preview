@@ -4,7 +4,7 @@ import { IconHelpCircle } from '@douyinfe/semi-icons';
 import { Button, Form, Tooltip, withField } from '@douyinfe/semi-ui'
 import { BaseFormApi } from '@douyinfe/semi-foundation/lib/es/form/interface'
 import { Props as JsonEditorProps } from '../json'
-import csses from './index.less'
+import csses from './index.module.less'
 
 interface Props {
   onSubmit: (v: Record<string, string>) => void;
@@ -15,7 +15,7 @@ const JsonEditor = createComponent<JsonEditorProps>({ module: 'json' })
 
 export default function form(props: Props) {
   const JsonEditorField = useMemo(() => withField(JsonEditor), [])
-  const formCtx = useRef<BaseFormApi>()
+  const formCtx = useRef<BaseFormApi>(undefined)
 
   return (
     <Form
@@ -40,7 +40,7 @@ export default function form(props: Props) {
         if (v.type) {
           const isUrlTouched = formCtx.current?.getTouched('url')
           if (!isUrlTouched) {
-            formCtx.current?.setValue('url', 'https://unpkg.com/vue-toggles@2.2.1/dist/vue-toggles.umd.cjs')
+            formCtx.current?.setValue('url', 'https://esm.sh/vue-toggles@2.2.1?external=vue')
           }
         }
       }}

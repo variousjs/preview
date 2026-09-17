@@ -1,12 +1,28 @@
-<!doctype html><html><head><meta charset="UTF-8"/><title>VariousJS</title><script>var VARIOUS_CONFIG = {
-  "dependencies": {
-    "react": "https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js",
-    "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js",
-    "react-router-dom": "https://cdn.jsdelivr.net/npm/@variousjs/registry@0.1.9/dist/react-router-dom/6.22.1/index.js",
-    "vue": "https://cdn.jsdelivr.net/npm/vue@3.5.22/dist/vue.global.prod.js",
-    "app": "./dist/app.js",
-    "demo": "./dist/demo.js",
-    "dino": "./dist/dino.js",
-    "json": "./dist/json.js"
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title> VariousJS </title>
+<link href="./dist/assets/style.css" rel="stylesheet" />
+<script>
+var VARIOUS_CONFIG = {
+  dependencies: {
+    react: 'https://esm.sh/react@19.2.0',
+    'react-dom': 'https://esm.sh/react-dom@19.2.0?deps=react@19.2.0',
+    'react-dom/client': 'https://esm.sh/react-dom@19.2.0/client?deps=react@19.2.0',
+    'react-router-dom': 'https://esm.sh/react-router-dom@6.22.1?deps=react@19.2.0,react-dom@19.2.0',
+    vue: 'https://esm.sh/vue@3.5.40',
+
+    app: './dist/app.js',
+    demo: './dist/demo.js',
+    dino: './dist/dino.js',
+    json: './dist/json.js'
   }
-}</script></head><body><div style="height: 100vh" id="root"></div><script src="https://cdn.jsdelivr.net/npm/@variousjs/various@5/dist/loader.js"></script></body></html>
+}
+</script>
+</head>
+<body>
+<div style="height: 100vh" id="root"></div>
+<script src="https://cdn.jsdelivr.net/npm/@variousjs/various@6/dist/loader.js"></script>
+</body>
+</html>

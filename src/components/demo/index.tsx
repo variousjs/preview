@@ -4,12 +4,12 @@ import { HashRouter } from 'react-router-dom'
 import { Button, Modal } from '@douyinfe/semi-ui'
 import { IconSettingStroked } from '@douyinfe/semi-icons'
 import Form from './form'
-import csses from './index.less'
+import csses from './index.module.less'
 
 const S = () => {
   const version = useRef(0)
   const [visible, setVisible] = useState(false)
-  const remove = useRef<() => Promise<void>>()
+  const remove = useRef<() => Promise<void>>(undefined)
   const [bg, setBg] = useState('px')
 
   const render = async (v: Record<string, string>) => {

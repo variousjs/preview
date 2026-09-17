@@ -1,7 +1,7 @@
 import React from 'react'
 import DinoGame from 'react-chrome-dino-ts'
 import 'react-chrome-dino-ts/index.css'
-import './index.less'
+import './index.module.less'
 
 export default function Dino(props: any) {
   return (
